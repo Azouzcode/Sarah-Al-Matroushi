@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التقرير الختامي للدورة التأهيلية القرآنية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Almarai', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .bg-pattern {
+            background-color: #0A2239;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%231a3a59' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h16v9h1v-9h9v9h1v-9h9v9h1v-9h9v9h1v-9h9v9h1v-9h9v9h1v-9h9v9h1v-9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        /* Styles for printing (PDF export) - CRITICAL FOR DESIGN INTEGRITY */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body, header, footer, section, div, span, ul, li, h1, h2, h3, h4, canvas {
+                -webkit-print-color-adjust: exact !important; /* For WebKit browsers (Chrome, Safari) */
+                print-color-adjust: exact !important; /* Standard property for exact color matching */
+                color-adjust: exact !important; /* For other browsers */
+            }
+            .shadow-2xl, .shadow-lg {
+                box-shadow: none !important; /* Remove shadows for cleaner print output */
+            }
+            .chart-container {
+                height: 350px !important; 
+                max-height: 350px !important;
+                page-break-inside: avoid; /* Prevent charts from breaking across pages */
+            }
+            section, main {
+                padding: 0.5cm !important; /* Use absolute units for consistent print size */
+                margin-bottom: 1cm !important;
+            }
+            .container {
+                width: 100% !important; /* Full width for print */
+                max-width: none !important;
+                margin: 0 !important;
+            }
+            /* Force text colors for better readability on paper while trying to maintain original design intent */
+            h1, h2, h3, h4, p, span, li, a {
+                color: #000000 !important; /* Default all text to black */
+            }
+            /* Override specific sections to maintain original text color on dark backgrounds */
+            /* This is the key fix: explicitly target elements in header/footer to keep them white */
+            header h1, header h2, header p, 
+            footer h3, 
+            footer p, 
+            footer p span { /* Target spans inside footer paragraphs */
+                color: #FFFFFF !important; /* Keep original white/light colors for header/footer text on dark background */
+            }
+            /* Ensure specific elements on light backgrounds maintain their intended dark color if overridden above */
+            .bg-white h3, .bg-white p, .bg-red-50, .bg-green-50 {
+                color: #0A2239 !important; /* Ensure dark text on light cards */
+            }
+            /* Adjust font sizes for print if needed for better fit/readability */
+            body { font-size: 12pt !important; }
+            h1 { font-size: 24pt !important; }
+            h2 { font-size: 18pt !important; }
+            h3 { font-size: 16pt !important; }
+            p { font-size: 11pt !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-[#0A2239] leading-relaxed">
+
+    <!-- Loading message for PNG export -->
+    <div id="loadingMessage" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center text-white text-2xl font-bold z-50 hidden">
+        جاري التصدير... الرجاء الانتظار
+    </div>
+
+    <!-- PDF Instructions Modal -->
+    <div id="pdfInstructionsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-lg mx-4 text-center">
+            <h3 class="text-2xl font-bold text-[#0A2239] mb-4">تعليمات تصدير PDF هامة</h3>
+            <p class="text-lg text-gray-700 mb-6">
+                للحصول على **أفضل جودة للتصميم والألوان** في ملف PDF، يرجى اتباع الخطوات التالية بعد النقر على زر الطباعة:
+            </p>
+            <ol class="list-decimal list-inside text-right text-lg text-gray-800 space-y-2 mb-6">
+                <li>في نافذة الطباعة، ابحث عن **"المزيد من الإعدادات" (More settings)**.</li>
+                <li>**قم بتفعيل خيار "الرسومات الخلفية" (Background graphics).** هذا الخيار ضروري جداً!</li>
+                <li>اضغط على "حفظ" أو "طباعة" لحفظ ملف PDF.</li>
+            </ol>
+            <button onclick="document.getElementById('pdfInstructionsModal').classList.add('hidden'); window.print();" class="bg-[#D9A443] text-[#0A2239] hover:bg-[#b88c3a] font-bold py-2 px-6 rounded-lg shadow-md transition-colors duration-300">
+                فهمت، تابع الطباعة
+            </button>
+        </div>
+    </div>
+
+    <header class="bg-pattern text-white text-center p-8 md:p-12 shadow-2xl relative">
+        <div class="absolute top-4 left-4 no-print flex flex-col space-y-2">
+            <button onclick="showPdfInstructions()" class="bg-[#D9A443] text-[#0A2239] hover:bg-[#b88c3a] font-bold py-2 px-4 rounded-lg shadow-md transition-colors duration-300">
+                تصدير إلى PDF
+            </button>
+            <button id="exportPngButton" onclick="exportPng()" class="bg-[#8CB2D9] text-white hover:bg-[#729bcc] font-bold py-2 px-4 rounded-lg shadow-md transition-colors duration-300">
+                تصدير إلى PNG
+            </button>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-bold text-[#D9A443]">بسم الله الرحمن الرحيم</h2>
+        <h1 class="text-3xl md:text-5xl font-extrabold mt-4 mb-2">التقرير الختامي للدورة التأهيلية القرآنية الأولى</h1>
+        <p class="text-lg md:text-xl text-[#8CB2D9]">ذي الحجة ١٤٤٦هـ - مركز سارة لتحفيظ القرآن الكريم</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <section id="intro" class="text-center mb-12">
+            <p class="max-w-4xl mx-auto text-xl md:text-2xl italic text-[#1A3A59]">
+                "الحمد لله الذي أنزل القرآن هدى للناس، والصلاة والسلام على خير من تلا كتاب الله وعلمه... في إطار حرص المركز على استثمار الأيام العشر من ذي الحجة، تم تنظيم هذه الدورة المكثفة لتعزيز مهارات الطلاب ليكونوا حفاظاً لكتاب الله عاملين به."
+            </p>
+        </section>
+
+        <section id="kpis" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 text-center mb-16">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-[#D9A443]">
+                <span class="text-5xl font-extrabold text-[#0A2239]">75</span>
+                <p class="text-xl font-bold text-[#39648C] mt-2">طالباً مشاركاً</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-[#D9A443]">
+                <span class="text-5xl font-extrabold text-[#0A2239]">9</span>
+                <p class="text-xl font-bold text-[#39648C] mt-2">أيام مباركة</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-[#D9A443] sm:col-span-2 lg:col-span-1">
+                <span class="text-5xl font-extrabold text-[#0A2239]">20</span>
+                <p class="text-xl font-bold text-[#39648C] mt-2">حديثاً نبوياً للحفظ</p>
+            </div>
+        </section>
+
+        <section id="achievements" class="mb-16">
+             <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[#0A2239]">أبرز إنجازات الدورة</h2>
+                <p class="text-lg text-[#39648C] mt-2">بفضل الله، حققت الدورة نتائج مثمرة تعكس جهود الطلاب والمعلمين.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-center mb-4">نسبة حفظ الأحاديث المقررة</h3>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="hadithChart"></canvas>
+                    </div>
+                     <p class="text-center mt-4 text-lg text-[#1A3A59]">يعكس هذا الإنجاز الكبير مدى جدية والتزام الطلاب خلال أيام الدورة المكثفة.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-white p-6 rounded-xl shadow-lg flex items-center space-x-4 space-x-reverse">
+                        <span class="text-4xl">✍️</span>
+                        <div>
+                            <h4 class="text-xl font-bold">تحسن القراءة والكتابة</h4>
+                            <p class="text-[#39648C]">لوحظ تطور كبير في المهارات الإملائية والنطق السليم لدى غالبية الطلاب.</p>
+                        </div>
+                    </div>
+                     <div class="bg-white p-6 rounded-xl shadow-lg flex items-center space-x-4 space-x-reverse">
+                        <span class="text-4xl">🕌</span>
+                        <div>
+                            <h4 class="text-xl font-bold">إتقان الوضوء والصلاة</h4>
+                            <p class="text-[#39648C]">تعلم الطلاب الطريقة الصحيحة للوضوء والصلاة على هدي النبي ﷺ.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg flex items-center space-x-4 space-x-reverse">
+                        <span class="text-4xl">🏆</span>
+                        <div>
+                            <h4 class="text-xl font-bold">اكتساب ثقافة إسلامية</h4>
+                            <p class="text-[#39648C]">زاد الرصيد المعرفي للطلاب من خلال المسابقات الثقافية اليومية.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="curriculum" class="mb-16">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[#0A2239]">محاور الدورة التعليمية</h2>
+                <p class="text-lg text-[#39648C] mt-2">برنامج متكامل يجمع بين العلم والعمل والروحانية.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center border-b-4 border-[#8CB2D9]">
+                    <div class="text-5xl mb-4">📖</div>
+                    <h3 class="text-2xl font-bold mb-2">الجانب النظري</h3>
+                    <ul class="list-none text-right space-y-2 text-[#1A3A59]">
+                        <li>- دروس في أحكام التجويد</li>
+                        <li>- كتاب صفة صلاة النبي ﷺ</li>
+                        <li>- كتاب صفة وضوء النبي ﷺ</li>
+                        <li>- شرح لامية ابن تيمية في العقيدة</li>
+                        <li>- كتاب ما لا يسع أطفال المسلمين جهله</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center border-b-4 border-[#D9A443]">
+                    <div class="text-5xl mb-4">✍️</div>
+                    <h3 class="text-2xl font-bold mb-2">الجانب العملي</h3>
+                    <ul class="list-none text-right space-y-2 text-[#1A3A59]">
+                        <li>- حفظ حديثين نبويين يومياً</li>
+                        <li>- تطبيقات عملية في التجويد</li>
+                        <li>- تلقين جماعي وفردي للقرآن</li>
+                        <li>- تعليم القراءة والكتابة</li>
+                        <li>- مسابقات ثقافية وتأهيلية يومية</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center border-b-4 border-[#39648C]">
+                    <div class="text-5xl mb-4">📚</div>
+                    <h3 class="text-2xl font-bold mb-2">الجانب الروحي</h3>
+                    <ul class="list-none text-right space-y-2 text-[#1A3A59]">
+                        <li>- صيام الأيام العشر من ذي الحجة</li>
+                        <li>- استضافة مشايخ ودعاة</li>
+                        <li>- غرس روح المنافسة في الخير</li>
+                        <li>- تعظيم شعائر الله في القلوب</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="expenses" class="mb-16 bg-white p-6 md:p-8 rounded-xl shadow-lg">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[#0A2239]">نظرة على مصروفات الدورة</h2>
+                <p class="text-lg text-[#39648C] mt-2">شفافية كاملة في إدارة الموارد المالية التي تم إنفاقها لخدمة كتاب الله.</p>
+                <div class="mt-4 text-4xl font-black text-[#D9A443]">
+                    53,300 <span class="text-2xl text-[#0A2239]">ريال يمني</span>
+                </div>
+                <p class="text-lg text-[#39648C]">(ما يعادل 400 ريال سعودي تقريباً)</p>
+            </div>
+            <div class="chart-container" style="height: 500px; max-height: 600px;">
+                <canvas id="expensesChart"></canvas>
+            </div>
+            <p class="text-center mt-4 text-lg text-[#1A3A59]">تم تخصيص الجزء الأكبر من الميزانية لتوفير الضيافة اليومية للطلاب، مما ساهم في خلق بيئة محفزة ومشجعة.</p>
+        </section>
+
+        <section id="challenges" class="mb-16">
+             <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[#0A2239]">التحديات والتوصيات</h2>
+                <p class="text-lg text-[#39648C] mt-2">من كل تحدٍ فرصة للتحسين والتطوير في الدورات القادمة.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">التحديات التي واجهتنا</h3>
+                    <div class="space-y-3">
+                        <div class="bg-red-50 border-r-4 border-red-500 p-4 rounded-lg shadow">صعوبة التوفيق بين الفئات العمرية المختلفة للطلاب.</div>
+                        <div class="bg-red-50 border-r-4 border-red-500 p-4 rounded-lg shadow">تفاوت مستويات الطلاب في الحفظ والاستيعاب.</div>
+                        <div class="bg-red-50 border-r-4 border-red-500 p-4 rounded-lg shadow">محدودية الوقت لتحقيق كافة الأهداف المرجوة.</div>
+                        <div class="bg-red-50 border-r-4 border-red-500 p-4 rounded-lg shadow">صعوبة توفير بعض التجهيزات التقنية والمشايخ.</div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">توصيات للمستقبل</h3>
+                     <div class="space-y-3">
+                        <div class="bg-green-50 border-r-4 border-green-500 p-4 rounded-lg shadow">زيادة حصص المتابعة الفردية للطلاب المتأخرين.</div>
+                        <div class="bg-green-50 border-r-4 border-green-500 p-4 rounded-lg shadow">تنظيم دورات مماثلة في إجازات أخرى لضمان الاستمرارية.</div>
+                        <div class="bg-green-50 border-r-4 border-green-500 p-4 rounded-lg shadow">توفير معدات التوثيق والعرض اللازمة بشكل مسبق.</div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-pattern text-white text-center p-8 mt-12">
+        <h3 class="text-2xl font-bold text-[#D9A443]">شكر وتقدير</h3>
+        <p class="max-w-3xl mx-auto mt-4 text-lg text-[#8CB2D9]">
+            نتقدم بجزيل الشكر لكل من ساهم في إنجاح هذه الدورة، وعلى رأسهم الأخت الفاضلة <span class="font-bold">سارة المطروشي</span> راعية الدورة، ورئيس المركز الأستاذ <span class="font-bold">رفيق التريكي</span>، وجميع المعلمين والإداريين.
+        </p>
+        <p class="mt-6 text-xl italic">"القرآن خير كله من علمه أو تعلمه أو أنفق في سبيله"</p>
+        <div class="mt-8 text-sm text-[#39648C]">
+            <p>اللجنة المنظمة والإعلامية - المشرف العام: عزيز التريكي</p>
+            <p>تصميم وإنفوجرافيك: <span class="font-bold">معتز التريكي</span></p>
+            <p>تاريخ الإعداد: ١٥ ذي الحجة ١٤٤٦هـ</p>
+        </div>
+    </footer>
+
+    <script>
+        // Register the datalabels plugin globally
+        Chart.register(ChartDataLabels);
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const processLabels = (labels) => {
+            const maxLen = 16;
+            return labels.map(label => {
+                if (typeof label !== 'string') return label; 
+                if (label.length <= maxLen) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+
+                for (let i = 0; i < words.length; i++) {
+                    const word = words[i];
+                    const testLine = (currentLine === '' ? word : currentLine + ' ' + word);
+                    if (testLine.length <= maxLen) {
+                        currentLine = testLine;
+                    } else {
+                        if (currentLine !== '') {
+                            lines.push(currentLine);
+                        }
+                        currentLine = word;
+                    }
+                }
+                if (currentLine !== '') {
+                    lines.push(currentLine);
+                }
+                return lines.length > 1 ? lines : label;
+            });
+        };
+
+
+        const hadithCtx = document.getElementById('hadithChart').getContext('2d');
+        new Chart(hadithCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['أحاديث تم حفظها', 'متبقي'],
+                datasets: [{
+                    label: 'نسبة الحفظ',
+                    data: [90, 10],
+                    backgroundColor: ['#D9A443', '#1A3A59'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 3,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#0A2239',
+                            font: {
+                                family: "'Almarai', sans-serif",
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        },
+                         bodyFont: {
+                            family: "'Almarai', sans-serif"
+                        },
+                        titleFont: {
+                            family: "'Almarai', sans-serif"
+                        }
+                    }
+                }
+            }
+        });
+
+        const expensesCtx = document.getElementById('expensesChart').getContext('2d');
+        const expenseLabels = [
+            'بسكويت', 
+            'عصير (تانج او عنناب)', 
+            'لوحة عرض الدورة', 
+            'مشاوير توصيل المشايخ', 
+            'سكر للعصير',
+            'كاسات سفرية', 
+            'متون الاربعين النووية', 
+            'ماء ثلج للعصير', 
+            'طباعة جدول العمل اليومي'
+        ];
+        const expenseData = [20500, 8300, 6000, 4750, 4000, 3750, 3000, 2850, 200];
+        
+        new Chart(expensesCtx, {
+            type: 'bar',
+            data: {
+                labels: processLabels(expenseLabels),
+                datasets: [{
+                    label: 'التكلفة (ريال يمني)',
+                    data: expenseData,
+                    backgroundColor: [
+                        '#D9A443', '#39648C', '#8CB2D9', '#1A3A59', '#F0B95B',
+                        '#5D9FD1', '#A7C2E4', '#2C5070', '#C7E0F4'
+                    ],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                indexAxis: 'y', // Horizontal bar chart
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                             color: '#0A2239',
+                             font: {
+                                family: "'Almarai', sans-serif"
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(10, 34, 57, 0.1)'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                             color: '#0A2239',
+                             font: {
+                                family: "'Almarai', sans-serif",
+                                size: 12
+                            }
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                       display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        },
+                        bodyFont: {
+                            family: "'Almarai', sans-serif"
+                        },
+                        titleFont: {
+                            family: "'Almarai', sans-serif"
+                        }
+                    },
+                    datalabels: { // Data labels plugin configuration
+                        color: '#0A2239',
+                        anchor: 'end',
+                        align: 'end',
+                        offset: 4,
+                        font: {
+                            family: "'Almarai', sans-serif",
+                            weight: 'bold',
+                            size: 11
+                        },
+                        formatter: function(value, context) {
+                            return value.toLocaleString();
+                        }
+                    }
+                }
+            }
+        });
+
+        // Function to show PDF instructions modal
+        function showPdfInstructions() {
+            document.getElementById('pdfInstructionsModal').classList.remove('hidden');
+        }
+
+        // Functions for PNG export
+        const loadingMessage = document.getElementById('loadingMessage');
+        const exportPngButton = document.getElementById('exportPngButton');
+
+        function exportPng() {
+            loadingMessage.classList.remove('hidden');
+            exportPngButton.disabled = true;
+
+            const printButtonsContainer = document.querySelector('.no-print');
+            const originalDisplay = printButtonsContainer.style.display;
+            printButtonsContainer.style.display = 'none'; // Temporarily hide buttons for capture
+
+            html2canvas(document.body, {
+                scale: 3, // Increased scale for very high resolution
+                useCORS: true,
+                allowTaint: true,
+                scrollX: 0,
+                scrollY: 0, 
+                windowWidth: document.documentElement.scrollWidth,
+                windowHeight: document.documentElement.scrollHeight,
+                backgroundColor: '#f3f4f6', // Ensure a solid background for capture
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'التقرير_الختامي_للدورة_التأهيلية_القرآنية.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }).catch(error => {
+                console.error('Error exporting PNG:', error);
+                alert('حدث خطأ أثناء تصدير الصورة. يرجى المحاولة مرة أخرى.');
+            }).finally(() => {
+                printButtonsContainer.style.display = originalDisplay; // Restore button visibility
+                loadingMessage.classList.add('hidden');
+                exportPngButton.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
